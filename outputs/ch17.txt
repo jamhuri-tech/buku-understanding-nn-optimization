@@ -1,0 +1,46 @@
+GD+L2 step [10.1713  5.5871  6.1478] decay form [10.1713  5.5871  6.1478] factors [1.     0.9998 0.9998]
+w0 [10.  5.  5.] grad L [ -8.5625 -29.4062 -57.4375] rho E w0 [0.   0.05 0.05]
+Adam+L2 g [ -8.5625 -29.3562 -57.3875] den [ 8.5625 29.3563 57.3875]
+  move [0.1 0.1 0.1] w1 [10.1  5.1  5.1]
+  loss part [-0.1    -0.1002 -0.1001]
+  decay term [0.     0.0002 0.0001] rate [0. 0. 0.]
+AdamW g [ -8.5625 -29.4062 -57.4375] den [ 8.5625 29.4063 57.4375]
+  move [0.1   0.095 0.095] w1 [10.1    5.095  5.095]
+  decay term [0.    0.005 0.005] rate [0.    0.001 0.001]
+w* (no penalty) [17.8993  6.0009  4.6128] L 0.2892 pen 0.5756
+w_rho exact [18.1637  5.9774  4.5847] L 0.2905 pen 0.5743
+GD+L2    [18.1626  5.9773  4.5848] L 0.2905 pen 0.5743 to w_rho 1.1e-03 to w* 2.7e-01
+Adam+L2  [18.1637  5.9774  4.5847] L 0.2905 pen 0.5743 to w_rho 1.1e-14 to w* 2.7e-01
+AdamW    [17.9004  6.0009  4.6126] L 0.2892 pen 0.5756 to w_rho 2.7e-01 to w* 1.2e-03
+1-D sig 0.0 Adam+L2 w 1.8182 den 0.0008 predicted 1.8182
+1-D sig 0.0 AdamW   w 1.9998 den 0.0011 predicted 1.9998
+1-D sig 1.0 Adam+L2 w 1.8148 den 0.9947 predicted 1.8182
+1-D sig 1.0 AdamW   w 1.8157 den 1.0334 predicted 1.8127
+cap step 1 w 0.11500
+cap step 2 w 0.12775
+cap step 3 w 0.13859
+fixed point 1/rho = 0.2
+net Adam+L2 rho 0.001 L 2.680e-04 (0.0331 pts^2) |wbar| 2.1665 max 1.4689
+net Adam+L2 rho 0.003 L 2.253e-04 (0.0278 pts^2) |wbar| 1.8605 max 1.1085
+net Adam+L2 rho 0.010 L 1.676e-03 (0.2069 pts^2) |wbar| 1.7368 max 1.0436
+net Adam+L2 rho 0.030 L 6.689e-03 (0.8257 pts^2) |wbar| 1.5470 max 0.9461
+net Adam+L2 rho 0.100 L 1.891e-02 (2.3341 pts^2) |wbar| 1.4125 max 0.8213
+net Adam+L2 rho 0.300 L 8.712e-02 (10.7538 pts^2) |wbar| 1.1342 max 0.6310
+net AdamW   rho 0.100 L 1.059e-04 (0.0131 pts^2) |wbar| 1.9524 max 1.2574
+net AdamW   rho 0.300 L 3.919e-04 (0.0484 pts^2) |wbar| 1.9114 max 1.1899
+net AdamW   rho 1.000 L 1.327e-02 (1.6385 pts^2) |wbar| 1.5559 max 0.8351
+net AdamW   rho 2.000 L 1.077e-01 (13.2957 pts^2) |wbar| 1.1801 max 0.5013
+net AdamW   rho 3.000 L 2.440e-01 (30.1202 pts^2) |wbar| 0.8243 max 0.3405
+net AdamW   rho 5.000 L 3.852e-01 (47.5493 pts^2) |wbar| 0.4910 max 0.2011
+net AdamW   rho 10.000 L 4.680e-01 (57.7650 pts^2) |wbar| 0.2453 max 0.1007
+net Adam rho 0 L 3.604e-11 |wbar| 2.5604 max 1.4768
+eff decay t=0 [0.0039 0.0041 0.002  0.0023 0.0007 0.0011]
+eff decay t=10 [0.0048 0.0059 0.0039 0.0047 0.0012 0.0022]
+eff decay t=100 [0.0041 0.0061 0.0078 0.0101 0.0019 0.0041]
+eff decay t=1000 [0.0166 0.0246 0.0315 0.0404 0.0078 0.0164]
+eff decay t=1999 [0.0321 0.0474 0.0607 0.0778 0.015  0.0316]
+CE Adam+L2 rho 0.01 [-24.9266   1.4026   3.2421] CE 5.92e-02 pen(0.01) 0.1216 max 3.2421
+CE AdamW   rho 0.01 [-118.2705    6.5053   15.4441] CE 2.64e-05 pen(0.01) 1.4042 max 15.4441
+CE AdamW   rho 0.30 [-27.4572   2.0275   3.3312] CE 5.22e-02 pen(0.01) 0.1282 max 3.3312
+CE AdamW   rho 1.00 [-9.068   0.9615  1.0003] CE 2.52e-01 pen(0.01) 0.2620 max 1.0003
+CE AdamW fixed eta 0.1, 1e5 steps [-220.0427   12.4637   28.569 ]

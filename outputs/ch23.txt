@@ -1,0 +1,90 @@
+== Noiseless 1-D quadratic, eta = 0.5, h = 1, w0 = 10
+t=0  w= 10.0000  wbar= 10.0000  u= 10.0000
+t=1  w=  5.0000  wbar=  7.5000  u=  7.2500
+t=2  w=  1.3750  wbar=  5.4583  u=  5.0500
+t=3  w= -1.1500  wbar=  3.8062  u=  3.3106
+t=4  w= -2.8053  wbar=  2.4839  u=  1.9550
+t=5  w= -3.7828  wbar=  1.4395  u=  0.9172
+t=6  w= -4.2414  wbar=  0.6279  u=  0.1410
+
+== Primal averaging as momentum: t, t/(t+2), 1/(t+2)
+t=1  momentum=0.3333  step factor=0.3333
+t=2  momentum=0.5000  step factor=0.2500
+t=3  momentum=0.6000  step factor=0.2000
+t=4  momentum=0.6667  step factor=0.1667
+t=5  momentum=0.7143  step factor=0.1429
+t=6  momentum=0.7500  step factor=0.1250
+
+== Weights c_(t+1) with warm-up t_w = 4 (no bias factor)
+t=0  eta_t/eta=0.2500  c=1.0000
+t=1  eta_t/eta=0.5000  c=0.8000
+t=2  eta_t/eta=0.7500  c=0.6429
+t=3  eta_t/eta=1.0000  c=0.5333
+t=4  eta_t/eta=1.0000  c=0.3478
+t=5  eta_t/eta=1.0000  c=0.2581
+t=6  eta_t/eta=1.0000  c=0.2051
+t=7  eta_t/eta=1.0000  c=0.1702
+== the same with the bias factor, omega_2 = 0.999
+t=0  eta_t/eta=0.0079  c=1.0000
+t=1  eta_t/eta=0.0224  c=0.8888
+t=2  eta_t/eta=0.0411  c=0.7499
+t=3  eta_t/eta=0.0632  c=0.6399
+t=4  eta_t/eta=0.0706  c=0.4443
+t=5  eta_t/eta=0.0774  c=0.3476
+t=6  eta_t/eta=0.0835  c=0.2884
+t=7  eta_t/eta=0.0893  c=0.2478
+
+== Noisy 1-D quadratic, h = 1, sigma = 1, eta = 0.5, w0 = 10
+method          gap t=10   t=100     t=1000    1000*gap
+constant          0.1667    0.1667    0.1667     166.7
+linear decay      0.1648    0.1455  0.004997     4.997
+cosine            0.1667    0.1614  0.003166     3.166
+Polyak             1.686   0.02443 0.0006978    0.6978
+schedule-free     0.5612   0.02317  0.002603     2.603
+primal             1.222    0.1273   0.08335     83.35
+bound sigma^2/(2hT) at T=1000: 0.0005
+
+== Students, linear model, full batch, eta = 1, beta' = 0.9
+w* = [68.25    6.0009  4.6128], L* = 0.2892
+t=0  u=[0. 0. 0.]  g=[-68.25   -13.6875  -8.8281]
+     w_1=[68.25   13.6875  8.8281]  wbar_1=[34.125   6.8438  4.4141]  gap=582.82
+t=1  u=[37.5375  7.5281  4.8555]  g=[-30.7125   2.916    1.2028]
+     w_2=[98.9625 10.7715  7.6254]  wbar_2=[55.7375  8.153   5.4845]  gap=84.05
+t=2  u=[60.06    8.4148  5.6986]  g=[-8.19    5.037   2.6883]
+     w_3=[107.1525   5.7345   4.9371]  wbar_3=[68.5913  7.5484  5.3476]  gap=3.22
+
+== Students, linear model, batches of two, 500 runs
+method          gap T=100  T=200     T=400     T=800
+constant 0.4       0.424    0.4091     0.401    0.3866
+constant 0.04     0.8336   0.01312    0.0114   0.01279
+cosine           0.01346   0.00774  0.005026   0.00323
+linear decay     0.01429   0.01058  0.006926  0.004911
+Polyak 0.4         2.166    0.5495    0.1388   0.03508
+schedule-free    0.03166   0.01267  0.005768  0.003062
+cosine planned for 800, read at t=100: 0.3722  t=200: 0.2481
+schedule-free, other eta (gaps at 100, 200, 400, 800)
+eta=0.4:     0.2219   0.01263  0.005481  0.002827
+eta=1.0:    0.03166   0.01267  0.005768  0.003062
+eta=2.0:      0.031   0.01463  0.006647  0.003573
+eta=4.0:  2.462e+04   0.05853   0.01245  0.006679
+
+== Network, batches of two, rho = 0.01, t_w = 100; L*_lin = 0.002343
+method            eta    T=500     T=1000    T=2000  to L*
+AdamW + cosine   0.03   0.00193  0.000145  8.98e-05  288
+AdamW + cosine   0.10  0.000112  0.000105  0.000105  109
+AdamW + cosine   0.30  0.000196  0.000151  0.000128  73
+schedule-free    0.03   0.00263  0.000348  0.000144  528
+schedule-free    0.10   0.00015  8.43e-05  0.000102  154
+schedule-free    0.30  9.86e-05  0.000175  0.000264  80
+schedule-free 0.1, plain average: T=500 0.000501  T=2000 8.63e-05  to L* 276
+schedule-free 0.1 at t=2000: L(u) 0.000112  L(w) 0.00746
+
+== Sensitivity to beta' (linear eta = 1; net eta = 0.1)
+beta'  lin T=200   lin T=800   net T=500  net T=2000  to L*
+ 0.00   diverges    diverges   0.000279    0.000933  196
+ 0.50     0.2793    0.009408   0.000116    0.000378  152
+ 0.80   0.007281    0.001862   0.000125     0.00012  145
+ 0.90    0.01267    0.003062    0.00015    0.000102  154
+ 0.95    0.02778    0.005636    0.00017    0.000101  164
+ 0.98     0.5373     0.01351   0.000188    0.000102  181
+ 1.00       80.2       45.29   0.000261    0.000105  195

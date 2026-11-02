@@ -1,0 +1,96 @@
+== Centred linear model: eigenvalues of H, L*, sigma^2(w*)
+lambda = [0.7662 1.     2.1674]  2/lambda_max = 0.9228  L* = 0.2892  sigma^2 = 2.7060
+Var of a batch of two = sigma^2/2 * 6/7 = 1.1597
+floor eta*Var/4 for eta=0.4: 0.1160, eta=0.04: 0.0116
+starting gap L(0) - L* = 2390.46
+
+== Schedules, first values and the sum over 400 steps
+constant 0.4   eta_0..3 = 0.4000 0.4000 0.4000 0.4000  eta_99 = 0.4000  eta_399 = 0.400000  sum = 160.00
+constant 0.04  eta_0..3 = 0.0400 0.0400 0.0400 0.0400  eta_99 = 0.0400  eta_399 = 0.040000  sum = 16.00
+step           eta_0..3 = 0.4000 0.4000 0.4000 0.4000  eta_99 = 0.4000  eta_399 = 0.000400  sum = 44.44
+exponential    eta_0..3 = 0.4000 0.3909 0.3820 0.3733  eta_99 = 0.0409  eta_399 = 0.000041  sum = 17.57
+1/t            eta_0..3 = 0.4000 0.3636 0.3333 0.3077  eta_99 = 0.0367  eta_399 = 0.009780  sum = 15.05
+cosine         eta_0..3 = 0.4000 0.4000 0.4000 0.3999  eta_99 = 0.3425  eta_399 = 0.000006  sum = 80.20
+
+== Predicted bias and variance parts, summed over the modes
+constant 0.4   T=100: bias 5.8e-33 var 1.81e-01   T=400: bias 2.5e-128 var 1.81e-01
+constant 0.04  T=100: bias 6.6e-01 var 1.20e-02   T=400: bias 2.1e-11 var 1.20e-02
+step           T=100: bias 5.8e-33 var 1.81e-01   T=400: bias 5.9e-36 var 3.90e-03
+exponential    T=100: bias 1.5e-12 var 1.46e-02   T=400: bias 7.9e-14 var 2.42e-03
+1/t            T=100: bias 1.2e-06 var 1.20e-02   T=400: bias 4.0e-11 var 3.14e-03
+cosine         T=100: bias 4.1e-31 var 1.43e-01   T=400: bias 5.3e-62 var 4.91e-03
+mode noise variances s_j^2 = [0.1926 0.2479 0.7192]
+
+== Mini-batch SGD, k = 2, mean gap over 500 seeds
+constant 0.4   gap(100) = 4.24e-01  gap(200) = 4.09e-01  gap(400) = 4.01e-01
+constant 0.04  gap(100) = 8.34e-01  gap(200) = 1.31e-02  gap(400) = 1.14e-02
+step           gap(100) = 4.24e-01  gap(200) = 1.25e-02  gap(400) = 3.98e-03
+exponential    gap(100) = 1.55e-02  gap(200) = 3.54e-03  gap(400) = 2.33e-03
+1/t            gap(100) = 1.27e-02  gap(200) = 6.12e-03  gap(400) = 3.14e-03
+cosine         gap(100) = 2.65e-01  gap(200) = 8.78e-02  gap(400) = 5.03e-03
+
+== Hand example: cosine with warm-up, eta_max = 0.4, t_w = 4, T = 20, on the intercept mode
+t=0  eta = 0.1000  e_t = -68.2500  move = 6.8250
+t=1  eta = 0.2000  e_t = -61.4250  move = 12.2850
+t=2  eta = 0.3000  e_t = -49.1400  move = 14.7420
+t=3  eta = 0.4000  e_t = -34.3980  move = 13.7592
+t=4  eta = 0.4000  e_t = -20.6388  move = 8.2555
+t=5  eta = 0.3962  e_t = -12.3833  move = 4.9057
+t=6  eta = 0.3848  e_t = -7.4776  move = 2.8772
+t=7  eta = 0.3663  e_t = -4.6004  move = 1.6851
+e_8 = -2.9153
+
+== Symbolic examples: eta_0 = 0.4, q = 0.5, tau = 3
+step  0.4000 0.4000 0.4000 0.2000 0.2000 0.2000 0.1000 0.1000 0.1000  sum = 2.1000
+exp   0.4000 0.3175 0.2520 0.2000 0.1587 0.1260 0.1000 0.0794 0.0630  sum = 1.6966
+1/t   0.4000 0.3000 0.2400 0.2000 0.1714 0.1500 0.1333 0.1200 0.1091  sum = 1.8239
+one mode, lambda = 2, s^2 = 1:
+eta = 0.1: v_inf = 0.02778  gap part = 0.02778  bias factor (1 - eta lam)^20 = 0.01153
+eta = 0.01: v_inf = 0.00253  gap part = 0.00253  bias factor (1 - eta lam)^20 = 0.66761
+SGDR, T_0 = 4, T_mult = 2: 0.4000 0.3414 0.2000 0.0586 0.4000 0.3848 0.3414 0.2765 0.2000 0.1235 0.0586 0.0152 0.4000
+Vaswani, d = 512, t_w = 4000: peak 6.988e-04  at s = 16000: 3.494e-04
+Goyal, k n = 8192: eta = 0.1 * 8192/256 = 3.2
+
+== 2-2-1 network, Hessian at the start
+largest eigenvalue = 1.3418  2/lambda_max = 1.4906  2(1+gamma)/lambda_max = 2.8321
+heavy ball, warm-up to eta = 3 over 100 steps: L = 0.2440  largest eigenvalue = 1.0803  2(1+gamma)/lambda_max = 3.5175
+
+== 2-2-1 network, full batch, 2000 steps: steps to linear L*, L(2000), largest L in steps 1-300
+HB   0.1   constant             65  1.4e-07  5.93e-01
+HB   0.1   warm-up              80  3.8e-09  6.23e-01
+HB   0.1   cosine               65  5.1e-06  5.93e-01
+HB   0.1   warm-up + cosine     80  8.3e-07  6.23e-01
+HB   1.5   constant           1536  2.1e-01  1.42e+00
+HB   1.5   warm-up              51  6.5e-32  6.19e-01
+HB   1.5   cosine              --  7.0e-02  1.41e+00
+HB   1.5   warm-up + cosine     51  1.2e-32  6.19e-01
+HB   3     constant            --  inf  inf
+HB   3     warm-up              49  2.0e-03  7.23e-01
+HB   3     cosine              --  inf  inf
+HB   3     warm-up + cosine     49  2.0e-03  6.96e-01
+Adam 0.03  constant            118  3.1e-30  5.87e-01
+Adam 0.03  warm-up             206  1.4e-12  6.23e-01
+Adam 0.03  cosine              119  3.6e-11  5.87e-01
+Adam 0.03  warm-up + cosine    207  1.4e-06  6.23e-01
+Adam 1     constant            --  1.1e-02  1.53e+00
+Adam 1     warm-up              66  2.7e-03  6.11e-01
+Adam 1     cosine              --  1.4e-01  1.53e+00
+Adam 1     warm-up + cosine     66  1.4e-33  6.11e-01
+
+== Mini-batches of two, 2000 steps: steps to linear L*, L(2000)
+HB   0.1   constant     71  6.4e-13  mean L(1001-2000) = 2.2e-09
+HB   0.1   cosine       71  1.4e-08  mean L(1001-2000) = 2.6e-08
+HB   0.3   constant    --  1.7e+00  mean L(1001-2000) = 1.4e+00
+HB   0.3   cosine      --  2.6e-01  mean L(1001-2000) = 3.1e-01
+Adam 0.03  constant    156  1.1e-04  mean L(1001-2000) = 1.3e-04
+Adam 0.03  cosine      156  8.2e-05  mean L(1001-2000) = 8.3e-05
+Adam 0.2   constant     79  6.3e-04  mean L(1001-2000) = 9.6e-03
+Adam 0.2   cosine       79  5.3e-10  mean L(1001-2000) = 4.5e-07
+
+== Adam, eta = 0.03, cosine, batches of two: the end point
+L = 8.156e-05  Hessian eigenvalues [-0.0001  0.0003  0.0054  0.0374  0.0706  0.1768  0.3801  1.0295  2.222 ]
+full-batch heavy ball from there, eta = 0.1: L(20000) = 6.045e-05
+
+== Range test, mini-batches of two, 400 steps
+HB: eta grows by 1.02335 per step; lowest L = 8.37e-04 at eta = 0.2117; L above L(w_0) = 0.6238 from eta = 0.4432; L below 0.9 L(w_0) from eta = 0.0018
+Adam: eta grows by 1.02617 per step; lowest L = 2.35e-03 at eta = 0.6204; L above L(w_0) = 0.6238 from eta = 1.4552; L below 0.9 L(w_0) from eta = 0.0025

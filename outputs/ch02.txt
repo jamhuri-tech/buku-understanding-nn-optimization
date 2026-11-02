@@ -1,0 +1,22 @@
+MSE: eigenvalues [2.39000e-02 1.20000e+00 5.79949e+01] kappa 2430.5
+q1 = [ 0.989  0.008 -0.148]  q3 = [-0.129 -0.444 -0.887]
+centred: H =
+ [[1.     0.     0.    ]
+ [0.     1.8125 0.6094]
+ [0.     0.6094 1.1211]] 
+ eigenvalues [0.7662 1.     2.1674] kappa 2.8
+std devs: 1.3463 1.0588
+standardised: H =
+ [[ 1.      0.     -0.    ]
+ [ 0.      1.      0.4275]
+ [-0.      0.4275  1.    ]] 
+ eigenvalues [0.5725 1.     1.4275] kappa 2.49
+pass labels: [0 1 0 1 0 1 1 1]
+CE(0) = 0.6931  grad(0) = [-0.125  -0.75   -1.2812]
+H_ce(0) = H/4: True
+scale 1: margins min = 0.50, CE = 0.196936, CE_reg = 0.2132
+scale 2: margins min = 1.00, CE = 0.081214, CE_reg = 0.1462
+scale 5: margins min = 2.50, CE = 0.011252, CE_reg = 0.4175
+scale 10: margins min = 5.00, CE = 0.000846, CE_reg = 1.6258
+lambda=0.01: w* = [-24.927   1.403   3.242], CE = 0.1216, eig = [6.00000e-04 4.06300e-02 2.62588e+00], kappa = 4384.2
+eig at 0: [6.20000e-03 3.10000e-01 1.45086e+01]

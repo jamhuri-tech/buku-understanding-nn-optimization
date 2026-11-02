@@ -1,0 +1,76 @@
+== linear model, centred features, k = 1 with replacement
+H =
+ [[1.     0.     0.    ]
+ [0.     1.8125 0.6094]
+ [0.     0.6094 1.1211]]
+H^-1 =
+ [[ 1.      0.      0.    ]
+ [ 0.      0.6751 -0.367 ]
+ [ 0.     -0.367   1.0914]]
+Sigma at w* =
+ [[ 0.5784 -0.1058  0.0824]
+ [-0.1058  1.2417  0.6054]
+ [ 0.0824  0.6054  0.8859]]
+sigma^2 = tr Sigma = 2.7060   tr(H^-1 Sigma) = 1.9392
+ T      last 0.1   tail 0.1   last dec   tail dec   tr/T
+   800  1.00e-01   3.27e-03   1.34e-02   5.38e-02   2.42e-03
+  8000  5.93e-02   2.90e-04   6.80e-04   2.26e-04   2.42e-04
+ 80000  1.17e-01   3.22e-05   1.94e-04   2.26e-05   2.42e-05
+T = 8000, eta = 0.1: last 5.93e-02, average of all iterates 3.56e-03
+== one mini-batch of two at w0
+batch [4 8]  errors [ 0.1357 -1.6271]  a~_i:
+[[ 1.     -0.5832  0.155 ]
+ [ 1.     -0.6839  0.8027]]
+g_B (w2 part) [-0.7457  0.5168 -0.6425]   full (w2 part) [ 0.1354  0.4151 -0.2763]
+g_B (W1 part) [-0.0505 -0.0952 -0.0415  0.0446  0.0992  0.0405]
+|g_B - g| = 0.9730   |g| = 0.5650
+sigma^2(w0) = 1.9336   batch of 2 without replacement: 0.8287   with: 0.9668
+sampled mean |g_B - g|^2 over 20000 batches = 0.8268
+== mini-batch SGD on the net, eta = 0.1
+k   L(50)      L(200)     L(2000)    sigma^2/L at 2000
+1   1.93e-02   3.90e-03   3.45e-04   9.72
+2   2.23e-02   3.94e-03   3.09e-04   10.20
+4   2.59e-02   3.93e-03   3.00e-04   10.25
+8   2.77e-02   3.97e-03   3.03e-04   10.19
+k = 1: first step below linear L* = 341
+k = 2: first step below linear L* = 335
+k = 4: first step below linear L* = 320
+k = 8: first step below linear L* = 319
+k = 1 at t = 2000: 2 max|grad f_i|^2 = 19.95
+== Polyak-Ruppert on the net, k = 1, eta = 0.1
+T =   200   last 3.90e-03   tail 5.05e-03   |avg - last| = 0.0869
+T =  2000   last 3.45e-04   tail 4.76e-04   |avg - last| = 0.1008
+T = 20000   last 4.85e-09   tail 1.33e-07   |avg - last| = 0.0087
+== plateaus near the saddle at zero, gradient descent eta = 0.1
+scale 1: steps to L < 0.1  GD 33  SGD k=1 32
+scale 0.1: steps to L < 0.1  GD 46  SGD k=1 43
+scale 0.01: steps to L < 0.1  GD 66  SGD k=1 65
+scale 0.001: steps to L < 0.1  GD 86  SGD k=1 87
+predicted steps per factor 10: 20.6
+SGD k=1 from zero, 200 steps: [ 0.      0.      0.      0.      0.      0.     -0.0301  0.      0.    ]
+== Hessian eigenvalues
+w0      L = 6.24e-01  eig: [-1.0542 -0.8066 -0.0765 -0.0628 -0.0117  0.0004  0.8158  0.976   1.3418]
+zero    L = 5.00e-01  eig: [-1.1835 -1.1835  0.      0.      0.      0.      1.      1.1835  1.1835]
+GD min  L = 1.73e-08  eig: [0.     0.0024 0.0069 0.031  0.1211 0.3088 1.3901 2.319  3.3083]
+GD min weights: [ 0.1237 -0.07   -0.6321  0.4306  0.9574 -0.6302 -0.182  -1.7209  1.1103]
+negative eigenvalues along GD (t, count): [(0, 5), (10, 2), (40, 1), (1000, 1)]
+smallest eigenvalue at t = 1000: -1.70e-03
+eta = 0.1, 20000 steps, lam_max for k = 1, 2, 4: [3.3464 3.3596 3.318 ]
+rank of J at GD min: 8
+== sharpness after 5000 steps, eta = 0.5
+k   L          lam_max   tr H     mean lam_max
+1   3.82e-27   1.7036    3.8244   1.71
+2   1.23e-13   2.6868    6.0252   2.66
+4   1.62e-10   3.2279    7.2959   3.16
+8   8.26e-10   3.2455    7.3375   3.25
+k = 1: ten seeds between 1.67 and 1.74
+k = 2: ten seeds between 2.60 and 2.70
+k = 4: ten seeds between 3.09 and 3.26
+k = 8: ten seeds between 3.25 and 3.25
+SGD k=1 min: [ 0.1168 -0.209  -1.0749  0.7052  1.8188 -1.153  -0.2392 -1.1993  0.9017]
+GD      min: [ 0.1229 -0.0724 -0.6379  0.4357  0.9742 -0.6406 -0.1831 -1.7067  1.0997]
+distance 1.2482
+epoch growth, eta = 0.5: at GD min 18.18  at SGD k=1 min 1.02
+loss at the midpoint 1.72e-03
+k = 1: L at +-0.5 along top [0.21   0.2152]  along flattest [0.0002 0.0004]
+k = 8: L at +-0.5 along top [0.4344 0.3512]  along flattest [0.0011 0.0018]

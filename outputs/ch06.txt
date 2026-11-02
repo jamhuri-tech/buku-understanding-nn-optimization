@@ -1,0 +1,63 @@
+L* = 0.2892, target = 0.2992
+toy mu=1 beta=25: eta = 0.1111, gamma = 0.4444, rate HB = 0.6667, rate GD = 0.9231
+  steps for 1e-6: HB 34.1, GD 172.6
+Lessard x0=3.3 first iterates: [ 3.3    -3.2     2.8     0.3556 -1.7185]
+  last 6 iterates: [ 2.1159  0.6465 -1.8024  2.1159  0.6465 -1.8024]
+  x0=3.0: max |x| over last 100 = 0.0000
+  x0=3.07: max |x| over last 100 = 2.1159
+  x0=3.3: max |x| over last 100 = 2.1159
+  x0=3.46: max |x| over last 100 = 2.1159
+  x0=3.5: max |x| over last 100 = 0.0000
+
+features  mu       beta     kappa    eta_HB   gamma   rate_HB  rate_GD
+raw        0.0239  57.9949  2430.45  0.06626  0.92206  0.96024  0.99918
+centred    0.7662   2.1674     2.83  0.72583  0.06465  0.25426  0.47764
+
+raw: eta = 0.06626, gamma = 0.92206, sqrt(gamma) = 0.96024
+lambda    eta*lam   1+g-eta*lam   disc        |r1|     |r2|   GD factor
+  0.0239   0.00158      1.92048    0.00e+00  0.96024  0.96024   0.99918
+  1.2000   0.07951      1.84255   -2.93e-01  0.96024  0.96024   0.95863
+ 57.9949   3.84253     -1.92048   -4.44e-16  0.96024  0.96024  -0.99918
+(1-sqrt g)^2 = 0.00158, (1+sqrt g)^2 = 3.84253, eta_GD = 0.03447, 2(1+g)/beta = 0.06628
+
+hand steps (raw, eta, gamma as above)
+g0 = [ -68.25 -235.5  -465.25]  v1 = w1 = [ 4.522  15.6034 30.8258]  L(w1) = 19272.1193
+g1 = [ 193.1306  661.0526 1326.7997]  gamma*v1 = [ 4.1695 14.3872 28.4232]  -eta*g1 = [-12.7961 -43.799  -87.909 ]
+v2 = [ -8.6266 -29.4118 -59.4859]  w2 = [ -4.1046 -13.8084 -28.66  ]  L(w2) = 49086.4542
+L(0) = 2390.7500
+GD eta=0.03447: L(w1) = 2386.6162, L(w2) = 2382.5056
+
+steps to reach the target loss
+features   GD 2/(mu+beta)   HB tuned   kappa-ratio   pred GD  pred HB
+raw             7525          311         24.2     7524.9    152.6
+centred            7            5          1.4        8.4      4.5
+
+raw, tuned for a wrong mu (beta exact)
+mu_est     eta       gamma     max|r|   steps
+ 0.00597  0.06759  0.96024   0.97992 659
+ 0.02386  0.06626  0.92206   0.96024 311
+ 0.09545  0.06370  0.85013   0.98919 276
+ 0.38179  0.05901  0.72234   0.99486 571
+raw, tuned for a wrong beta (mu exact)
+beta_est   eta       gamma     max|r|   peak gap   steps
+  52.195  0.07346  0.91802   1.84462        inf   diverges
+  57.995  0.06626  0.92206   0.96024   7.85e+05   311
+  63.794  0.06034  0.92555   0.96205   2.16e+04   138
+  86.992  0.04450  0.93589   0.96742   5.96e+03   150
+ 115.990  0.03352  0.94424   0.97172   2.39e+03   215
+initial gap per mode: [   3.4741    2.5557 2384.431 ]
+
+single-sample heavy ball, centred, floor = mean gap epochs 501-1000
+eta     gamma  eta/(1-gamma)  floor
+ 0.020   0.00      0.020   1.37e-02
+ 0.002   0.90      0.020   1.34e-02
+ 0.020   0.90      0.200   2.28e-01
+
+slice: mu = 1.1937, beta = 57.0250, kappa = 47.77
+  GD eta = 0.03435, rate 0.9590; HB eta = 0.05353, gamma = 0.5583, rate 0.7472
+  GD after 30 steps: distance to minimiser 1.9621
+  HB after 30 steps: distance to minimiser 0.0099
+  start distance 6.8909
+
+transient: 1 - r = 1.9602, amplitude peak 18.145 at t = 24, predicted gap 7.85e+05
+  measured peak gap 7.85e+05 at t = 24

@@ -1,0 +1,65 @@
+== Counterexample, C = 3, omega2 = 1/(1+C^2) = 0.1, omega1 = 0, eta = 0.5, eta_t = eta/sqrt(t+1), x0 = 1
+sqrt(1-omega2) = 0.9487   omega2*C^2 + 1 - omega2 = 1.8000 = 2(1-omega2)
+time average of g over a cycle = 0.3333
+-- rmsprop
+  t   g     eta_t     r_t     rmax_t   move     x_{t+1}
+  0  +3  0.5000  8.1000  8.1000  -0.5270  +0.4730
+  1  -1  0.3536  1.7100  8.1000  +0.2704  +0.7433
+  2  -1  0.2887  1.0710  8.1000  +0.2789  +1.0000
+  3  +3  0.2500  8.2071  8.2071  -0.2618  +0.7382
+  4  -1  0.2236  1.7207  8.2071  +0.1705  +0.9087
+  5  -1  0.2041  1.0721  8.2071  +0.1971  +1.0000
+  Gamma_1..5 = [-1.9935 -0.1137  7.8742 -5.5929 -0.7939]
+-- amsgrad
+  t   g     eta_t     r_t     rmax_t   move     x_{t+1}
+  0  +3  0.5000  8.1000  8.1000  -0.5270  +0.4730
+  1  -1  0.3536  1.7100  8.1000  +0.1242  +0.5972
+  2  -1  0.2887  1.0710  8.1000  +0.1014  +0.6986
+  3  +3  0.2500  8.2071  8.2071  -0.2618  +0.4368
+  4  -1  0.2236  1.7207  8.2071  +0.0781  +0.5149
+  5  -1  0.2041  1.0721  8.2071  +0.0713  +0.5861
+  Gamma_1..5 = [2.3577 1.8092 1.6002 1.3526 1.2228]
+sgd      x_300 = -0.9422  R_T/T = 0.1140
+rmsprop  x_300 = +1.0000  R_T/T = 0.6927
+amsgrad  x_300 = -0.9798  R_T/T = 0.2008
+RMSProp x at t = 3k, k = 1..100 all equal 1: True
+lower bound (2C-4)/3 = 0.6667
+RMSProp T = 30000: R_T/T = 0.6692
+AMSGrad T = 30000: R_T/T = 0.0050  x_T = -0.9980  rmax = 8.2072
+-- per-cycle bounds (k >= 1)
+  down move <= 1.0541 eta_t,  each up move >= 0.7454 eta_t,  two up >= 1.4907
+
+== Reddi et al. synthetic: g = 1010 when t mod 101 = 0, else -10; eta_t = eta/sqrt(t+1)
+SGD      cycle means at 1,10,100,1000,2000: +0.915 -0.059 -0.738 -0.921 -0.944   R_T/T = 1.1004
+RMSProp  cycle means at 1,10,100,1000,2000: -0.367 +0.306 +0.983 +0.995 +0.996   R_T/T = 0.2802
+Adam     cycle means at 1,10,100,1000,2000: -0.695 -0.209 +0.985 +0.995 +0.997   R_T/T = 0.2694
+AMSGrad  cycle means at 1,10,100,1000,2000: -0.709 -0.721 -0.775 -0.945 -0.998   R_T/T = 0.0892
+
+== Linear model, raw features, steps to L* + 0.01
+Adam 0.1      4114   gap(20000) = 8.271e-15   max gap 10001-20000 = 4.787e-02
+AMSGrad 0.1  12818   gap(20000) = 4.995e-04   max gap 10001-20000 = 3.238e-02
+Adam 1.0       758   gap(20000) = 2.207e-07   max gap 10001-20000 = 3.968e+00
+AMSGrad 1.0    881   gap(20000) = 2.165e-15   max gap 10001-20000 = 2.165e-15
+AMSGrad 0.1: the max first acts at t = 69
+  t=68  r = [ 102.8019 1215.7057 4754.4557]  rmax = [ 102.8019 1215.7057 4754.4557]
+  t=69  r = [ 102.8067 1215.6868 4754.469 ]  rmax = [ 102.8067 1215.7057 4754.469 ]
+  t= 100  sqrt(rmax/r) = [1.0104 1.0109 1.0108]
+  t=1000  sqrt(rmax/r) = [1.584  1.5857 1.5854]
+  t=5000  sqrt(rmax/r) = [11.6032 11.7283 11.7237]
+
+== 2-2-1 network, full batch
+eta=0.01 Adam     to L*   376  to 1e-4  1386  L(2000) = 2.37e-06
+eta=0.01 AMSGrad  to L*   391  to 1e-4  1831  L(2000) = 6.24e-05
+   AMSGrad at t=1999: max sqrt(rmax/r) = 2.573
+   largest weight difference at t=2000 = 8.86e-02
+eta=0.03 Adam     to L*   118  to 1e-4   360  L(2000) = 3.10e-30
+eta=0.03 AMSGrad  to L*   119  to 1e-4   379  L(2000) = 7.16e-17
+   AMSGrad at t=1999: max sqrt(rmax/r) = 2.634
+   largest weight difference at t=2000 = 1.58e-03
+
+== 2-2-1 network, mini-batches of two, eta = 0.03, full-batch loss
+Adam     L(100) = 1.54e-02  L(500) = 1.21e-04  L(2000) = 1.06e-04
+Adam     to L*   156  max L(1000..2000) = 7.03e-04
+AMSGrad  L(100) = 1.54e-02  L(500) = 1.17e-04  L(2000) = 9.11e-05
+AMSGrad  to L*   156  max L(1000..2000) = 1.20e-04
+AMSGrad at t=1999: sqrt(rmax/r) min 1.94 max 2.51

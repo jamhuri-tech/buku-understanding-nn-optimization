@@ -1,0 +1,106 @@
+== (a) Hand example at the start
+W1 =
+ [[-0.4   0.12 -0.83]
+ [ 0.33  0.57 -0.23]] 
+w2 = [ 0.22  0.13 -0.2 ]
+G1 =
+ [[ 0.021  -0.0774 -0.0646]
+ [-0.0512  0.146   0.1331]] 
+g2 = [ 0.1354  0.4151 -0.2763]
+||W1||_F^2 = 1.35  ||w2||^2 = 0.1053
+||G1||_F^2 = 0.052247  ||g2||^2 = 0.26701
+||w|| = [1.1619 0.3245]  ||g|| = [0.2286 0.5167]  ratio ||w||/||g|| = [5.083 0.628]
+psi = 1.0: q = [5.0832 0.628 ]
+q * g, layer 1 =
+ [[ 0.1066 -0.3934 -0.3283]
+ [-0.2604  0.7422  0.6764]] 
+q * g, layer 2 = [ 0.085   0.2607 -0.1735]
+LARS step eta = 0.05, psi = 1, first step (v = 0):
+W1 ->
+ [[-0.4053  0.1397 -0.8136]
+ [ 0.343   0.5329 -0.2638]] 
+w2 -> [ 0.2157  0.117  -0.1913]
+relative change per layer = [0.05 0.05]
+L(w0) = 0.6238  L(w1) LARS = 0.6027  L(w1) GD = 0.6081
+GD relative change per layer = [0.0098 0.0796]
+LAMB first step (u = sign g up to zeta), eta = 0.05:
+move per entry = [0.0237 0.0094]
+W1 ->
+ [[-0.4237  0.1437 -0.8063]
+ [ 0.3537  0.5463 -0.2537]] 
+w2 -> [ 0.2106  0.1206 -0.1906]
+check with adam_l: True  L(w1) LAMB = 0.6049
+
+== Noise scale tr(Sigma)/||g||^2 along GD, eta = 0.1
+t =     0: B =      6.057  L = 6.24e-01
+t =    10: B =      7.915  L = 4.23e-01
+t =   100: B =     66.972  L = 8.08e-03
+t =  1000: B =    918.053  L = 7.05e-04
+t =  3000: B =   1555.661  L = 1.48e-04
+
+== (b) ||w||/||g|| along GD, eta = 0.1
+t =     0: ratio W1 =     5.083  w2 =     0.628  W1/w2 =   8.094
+t =    10: ratio W1 =     8.475  w2 =     0.623  W1/w2 =  13.598
+t =    20: ratio W1 =     6.164  w2 =     1.603  W1/w2 =   3.845
+t =    50: ratio W1 =    20.282  w2 =    10.625  W1/w2 =   1.909
+t =   100: ratio W1 =    63.336  w2 =    79.027  W1/w2 =   0.801
+t =   500: ratio W1 =   354.923  w2 =   382.105  W1/w2 =   0.929
+t =  1000: ratio W1 =   851.316  w2 =   778.085  W1/w2 =   1.094
+t =  2000: ratio W1 =  1487.167  w2 =  1481.953  W1/w2 =   1.004
+t =  3000: ratio W1 =  2198.694  w2 =  2345.127  W1/w2 =   0.938
+
+== (c) Rates at k = 8, polynomial decay, 400 steps
+  SGDM   eta = 0.03  steps to L* =  113  final L = 9.71e-04
+  SGDM   eta = 0.1   steps to L* =   70  final L = 2.85e-04
+  SGDM   eta = 0.3   steps to L* =   54  final L = 2.54e-04
+  SGDM   eta = 1     steps to L* =   58  final L = 9.61e-04
+  LARS   eta = 0.01  steps to L* =   85  final L = 1.59e-05
+  LARS   eta = 0.02  steps to L* =   73  final L = 9.23e-05
+  LARS   eta = 0.05  steps to L* =   61  final L = 1.01e-03
+  LARS   eta = 0.1   steps to L* =   --  final L = 1.81e-01
+  AdamW  eta = 0.01  steps to L* =   --  final L = 8.99e-03
+  AdamW  eta = 0.03  steps to L* =  180  final L = 1.62e-03
+  AdamW  eta = 0.1   steps to L* =   65  final L = 3.34e-05
+  AdamW  eta = 0.3   steps to L* =   89  final L = 3.17e-04
+  LAMB   eta = 0.01  steps to L* =   --  final L = 3.09e-01
+  LAMB   eta = 0.03  steps to L* =  180  final L = 1.10e-04
+  LAMB   eta = 0.1   steps to L* =   --  final L = 1.64e-01
+  LAMB   eta = 0.3   steps to L* =   --  final L = 1.08e-01
+  chosen: {'SGDM': 0.3, 'LARS': 0.05, 'AdamW': 0.1, 'LAMB': 0.03}
+
+== (c) Batch sizes, 400 epochs, linear scaling from k = 8
+linear L* (standard units) = 0.002343
+k = 1, steps = 3200
+  SGDM   eta = 0.0375   epochs to L* =   10.75  final L = 2.13e-05
+  LARS   eta = 0.00625  epochs to L* =      --  final L = 3.79e-02
+  AdamW  eta = 0.0125   epochs to L* =  74.875  final L = 1.21e-04
+  LAMB   eta = 0.00375  epochs to L* =  221.25  final L = 1.71e-03
+k = 2, steps = 1600
+  SGDM   eta = 0.075    epochs to L* =    19.5  final L = 1.67e-05
+  LARS   eta = 0.0125   epochs to L* =   30.25  final L = 3.25e-04
+  AdamW  eta = 0.025    epochs to L* =    52.5  final L = 1.01e-04
+  LAMB   eta = 0.0075   epochs to L* =  144.75  final L = 7.51e-05
+k = 4, steps = 800
+  SGDM   eta = 0.15     epochs to L* =    48.5  final L = 4.56e-04
+  LARS   eta = 0.025    epochs to L* =     118  final L = 6.51e-08
+  AdamW  eta = 0.05     epochs to L* =      40  final L = 1.11e-04
+  LAMB   eta = 0.015    epochs to L* =     151  final L = 9.37e-05
+k = 8, steps = 400
+  SGDM   eta = 0.3      epochs to L* =      54  final L = 2.54e-04
+  LARS   eta = 0.05     epochs to L* =      61  final L = 1.01e-03
+  AdamW  eta = 0.1      epochs to L* =      65  final L = 3.34e-05
+  LAMB   eta = 0.03     epochs to L* =     180  final L = 1.10e-04
+
+== (d) Rescaled layers
+rescaled layers (c = 10), full batch, 400 steps
+  SGDM              eta = 0.3    steps to L* =   54  L(end) = 2.54e-04  (400 steps)
+  SGDM resc.        eta = 0.3    steps to L* =   --  L(end) = 1.79e+09  (4 steps)
+  LARS              eta = 0.05   steps to L* =   61  L(end) = 1.01e-03  (400 steps)
+  LARS resc.        eta = 0.05   steps to L* =   61  L(end) = 1.01e-03  (400 steps)
+  AdamW             eta = 0.1    steps to L* =   65  L(end) = 3.34e-05  (400 steps)
+  AdamW resc.       eta = 0.1    steps to L* =   --  L(end) = 3.92e-03  (400 steps)
+  LAMB              eta = 0.03   steps to L* =  180  L(end) = 1.10e-04  (400 steps)
+  LAMB resc.        eta = 0.03   steps to L* =  180  L(end) = 1.24e-04  (400 steps)
+  SGDM resc. 0.03   eta = 0.03   steps to L* =   --  L(end) = 1.07e-02  (400 steps)
+  SGDM resc. 0.01   eta = 0.01   steps to L* =   --  L(end) = 1.09e-02  (400 steps)
+  SGDM resc. 0.001  eta = 0.001  steps to L* =   --  L(end) = 1.10e-02  (400 steps)

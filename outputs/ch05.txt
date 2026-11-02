@@ -1,0 +1,52 @@
+RM eta=1/t  t=1  w=4.0000
+RM eta=1/t  t=2  w=5.5000
+RM eta=1/t  t=3  w=5.3333
+RM eta=1/t  t=4  w=6.0000
+RM eta=0.5  t=1  w=2.0000
+RM eta=0.5  t=2  w=4.5000
+RM eta=0.5  t=3  w=4.7500
+RM eta=0.5  t=4  w=6.3750
+floor eta=0.5: variance eta*s2/(2-eta) = 1.3333
+floor eta=0.1: variance eta*s2/(2-eta) = 0.2105
+floor eta=0.01: variance eta*s2/(2-eta) = 0.0201
+mean run eta=0.1: w_T=5.1822  spread of last 1000 = 0.4535
+mean run eta=1/t: w_T=4.9732  spread of last 1000 = 0.0254
+KW f(1.5)=1.2656 f(0.5)=0.0156 exact difference=1.2500
+KW noisy estimate=1.2700  step to 0.7460
+KW sd of estimate sigma/(sqrt2 c)=0.1414  best c=0.3684
+centred w* = [68.25    6.0009  4.6128]  L* = 0.2892
+mu=0.7662 beta=2.1674 kappa=2.8288
+|x_i|^2 = [8.9102 4.2852 2.0352 1.1602 2.4727 3.2852 2.5977 6.7227]  2/max = 0.2245
+LMS sample 1: r=-48.0000  w=[ 2.4  -5.4  -4.05]  L=2388.4441
+LMS sample 2: r=-62.1656  w=[ 5.5083 -9.2854  0.0296]  L=2234.7799
+LMS sample 3: r=-47.5481  w=[  7.8857 -11.0684  -1.6048]  L=2172.6030
+LMS after one ordered epoch: w=[24.5575  4.3367  3.6206]  L=958.8728
+w=0: mean g = [-68.25   -13.6875  -8.8281]
+w=0: |g_i|^2 = [20529.     18666.1406  7326.5625  5364.5625 10128.     21025.
+ 14224.7656 49720.7656]
+w=0: variance = 13449.7537  |grad L|^2 = 4923.35
+w*: mean g = [ 0.  0. -0.]
+w*: |g_i|^2 = [9.5636 2.7641 0.6801 0.0424 0.1837 4.692  2.0401 1.6817]
+w*: variance = 2.7060  |grad L|^2 = 0.00
+residuals at w* = [-1.036   0.8031  0.5781  0.1913  0.2726 -1.1951  0.8862 -0.5001]
+g_1 at w* = [-1.036   2.331   1.7483]  g_2 = [ 0.8031 -1.0039  1.0541]
+batch {1,2} at w* = [-0.1164  0.6636  1.4012]
+raw features: variance at 0 = 33766.6  max |x_i|^2 = 87.50
+k=1: with repl   2.7060   without   2.7060
+k=2: with repl   1.3530   without   1.1597
+k=4: with repl   0.6765   without   0.3866
+k=8: with repl   0.3382   without   0.0000
+decreasing step: c=2.6103 t0=26 eta_0=0.1004
+GD eta=0.4: first epoch with gap < 1e-6: 22
+LMS eta=0.1     e10=1.02e-01 e100=1.00e-01 e1000=5.93e-02 floor=9.40e-02
+LMS eta=0.05    e10=1.46e+00 e100=4.03e-02 e1000=2.30e-02 floor=3.84e-02
+LMS eta=0.02    e10=9.97e+01 e100=1.44e-02 e1000=9.76e-03 floor=1.37e-02
+LMS decreasing  e10=2.44e+00 e100=2.52e-03 e1000=2.60e-04 floor=3.81e-04
+floor/eta for eta=0.1: 0.940  eta*s2/4 = 6.76e-02
+floor/eta for eta=0.05: 0.768  eta*s2/4 = 3.38e-02
+floor/eta for eta=0.02: 0.686  eta*s2/4 = 1.35e-02
+decreasing: epoch*gap at 100, 1000 = 0.25 0.26
+batch k=1: steps/epoch=8 floor with 9.40e-02 without 3.53e-02  eta*s2/(4k) 6.76e-02
+batch k=2: steps/epoch=4 floor with 4.04e-02 without 3.47e-03  eta*s2/(4k) 3.38e-02
+batch k=4: steps/epoch=2 floor with 1.88e-02 without 3.03e-04  eta*s2/(4k) 1.69e-02
+batch k=8: steps/epoch=1 floor with 9.07e-03 without 0.00e+00  eta*s2/(4k) 8.46e-03

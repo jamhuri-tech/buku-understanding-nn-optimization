@@ -1,0 +1,58 @@
+toy: L = (w1^2 + 10 w2^2)/2 at w = (2, 1)
+  L = 7, g = [ 2. 10.], g'g = 104, g'Hg = 1004
+  eta = 1.0000  phi =  405.0000  line = -45.0000
+  eta = 0.5000  phi =   80.5000  line = -19.0000
+  eta = 0.2500  phi =   12.3750  line =  -6.0000
+  eta = 0.1250  phi =    1.8438  line =   0.5000
+  eta = 0.0625  phi =    2.4609  line =   3.7500
+  accepted 0.0625, bound 2tau(1-c1)/beta = 0.0500, exact = 0.1036, w1 = [1.875 0.375]
+  c1=0.1, c2=0.9: Armijo eta <= 0.1865, curvature eta >= 0.01036, strong eta <= 0.1968
+
+students: L0 = 2390.7500, g'g = 276575.875, g'Hg = 16039626.66, exact step = 0.01724, 2/beta = 0.03449
+  mu = 0.0239, beta = 57.9949, kappa = 2430.45
+  eta = 1.000000  phi =   7745628.206  line =   2363.092
+  eta = 0.500000  phi =   1869056.145  line =   2376.921
+  eta = 0.250000  phi =    434485.114  line =   2383.836
+  eta = 0.125000  phi =     93128.349  line =   2387.293
+  eta = 0.062500  phi =     16432.154  line =   2389.021
+  eta = 0.031250  phi =      1579.603  line =   2389.886
+  bound 2tau(1-c1)/beta = 0.01724
+  phi'(0) = -276575.875, phi'(0.03125) = 224662.458, 0.9 phi'(0) = -248918.288
+  first-line intervals, c1=1e-4, c2=0.9: curvature eta >= 0.00172, Armijo eta <= 0.03448, strong eta <= 0.03276
+  w1 = [ 2.1328125  7.359375  14.5390625], L(w1) = 1579.603
+  BB: s0's0 = 270.0936, s0'z0 = 15663.6979, eta1 = 0.01724
+
+runs to L <= L* + 0.01 = 0.2992 from w = 0
+rule            steps  grads  losses  min eta  max eta
+fixed 0.03        4085   4085    4086  0.03000  0.03000
+exact             3143   3143    3144  0.01724  0.85537
+backtrack cold    3340   3340   19457  0.03125  0.06250
+backtrack warm    3340   3340    6685  0.03125  0.06250
+BB                  11     11      17  0.01724 41.51537
+cold accepted steps: {'0.031250': 2756, '0.062500': 584}
+  BB step 1: eta = 0.03125
+  BB step 2: eta = 0.01724
+  BB step 3: eta = 0.01724
+  BB step 4: eta = 0.85743
+  BB step 5: eta = 0.85914
+  BB step 6: eta = 18.04741
+  BB step 7: eta = 41.51537
+  BB step 8: eta = 0.01883
+  BB step 9: eta = 0.01724
+  BB step 10: eta = 0.01725
+  BB step 11: eta = 0.83333
+1/mu = 41.91, 1/lam2 = 0.8333
+BB losses: 2391 1580 6.026 5.93 3.614 3.477 1.328 2.77e+04 236.6 1.917 1.851 0.2893
+warm: share of steps with eta > 2/beta: 0.175
+warm first 8 etas: [0.03125 0.03125 0.03125 0.03125 0.03125 0.03125 0.03125 0.03125]
+
+CE: L* = 0.121627, beta bound = 14.5087, 1/beta = 0.06892, lam_max H(w*) = 2.6259
+tol     fixed-steps  bt-steps  bt-losses  bt median eta  bt max eta
+1e-02        21756      3816       7633         0.5000      2.0000
+1e-04        72650      8609      17218         0.5000      2.0000
+1e-06       127924     13138      26276         0.5000      2.0000
+ex 7.1: eta = 1.0: phi = 4, line = -4
+ex 7.1: eta = 0.5: phi = 0, line = 0
+ex 7.1: eta = 0.25: phi = 1, line = 2
+ex 7.2: c1=0.2 Armijo eta <= 0.800, c2=0.5 curvature eta >= 0.250, strong eta <= 0.750
+ex 7.3: steps bound min(1, 2*0.5*0.9/50) = 0.018, trials <= 6
